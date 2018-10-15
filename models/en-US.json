@@ -1,0 +1,167 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "jarvis",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "DeployIntent",
+                    "slots": [
+                        {
+                            "name": "app_name",
+                            "type": "AMAZON.SoftwareApplication",
+                            "samples": [
+                                "blog",
+                                "fake blog"
+                            ]
+                        },
+                        {
+                            "name": "app_environment",
+                            "type": "DeployEnvironment",
+                            "samples": [
+                                "prod",
+                                "dev",
+                                "development",
+                                "production",
+                                "staging"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "deploy",
+                        "the deployment of my app please",
+                        "can you update my app",
+                        "deploy my app"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "DeployEnvironment",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "production",
+                                "synonyms": [
+                                    "prod"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "development",
+                                "synonyms": [
+                                    "dev"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "staging"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "DeployIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.24824253119"
+                    },
+                    "slots": [
+                        {
+                            "name": "app_name",
+                            "type": "AMAZON.SoftwareApplication",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.24824253119.1329013864966",
+                                "elicitation": "Elicit.Slot.24824253119.1329013864966"
+                            }
+                        },
+                        {
+                            "name": "app_environment",
+                            "type": "DeployEnvironment",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.24824253119.976751151055",
+                                "elicitation": "Elicit.Slot.24824253119.976751151055"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Confirm.Intent.24824253119",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I will deploy your {app_name} application in {app_environment} environment. Do you wish to proceed?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.24824253119.1329013864966",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which of your apps do you wish to deploy today, cowboy?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.24824253119.1329013864966",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Got it. Is that your {app_name} application?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.24824253119.976751151055",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Where do you want this app deployed?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.24824253119.976751151055",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Is that in {app_environment} environment?"
+                    }
+                ]
+            }
+        ]
+    }
+}
