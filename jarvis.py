@@ -3,6 +3,8 @@ import json
 import falcon
 from falcon_ask import dispatch_request, FalconAskMiddleware, respond, util
 
+from deploy import deploy
+
 
 def deploy_fn(body):
     response = None
@@ -19,6 +21,18 @@ def deploy_fn(body):
         response = 'OK! You can ask me to deploy your app again sometime.'
         if intent_status == 'CONFIRMED':
             response = "Yeehaw! You're app is now being deployed."
+            deploy(
+                name='insert-app-name',
+                path='insert-app-src-dir',
+                image='insert-image-name',
+                # Get values from "minikube docker-env".
+                env={
+                    'DOCKER_TLS_VERIFY': '',
+                    'DOCKER_HOST': '',
+                    'DOCKER_CERT_PATH': '',
+                    'DOCKER_API_VERSION': '',
+                },
+            )
 
     return respond(response, end_session=end_session, directives=directives)
 
